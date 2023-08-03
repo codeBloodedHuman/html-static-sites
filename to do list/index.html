@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>To Do List</title>
+    <style>
+        .main-content{
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex main-content mt-5">
+            <h1 class="text-center">To Do List (CRUD Operations)</h1>
+            <form action="" method="" class="d-flex">
+                <input type="text" name="name" id="name" class="form-control">
+                <button  class="submit btn btn-primary ms-2 d-flex" style="align-items: center;"><i class='fa-solid fa-plus me-2'></i> Add</button>
+            </form>
+            <ul class="list p-3" style="list-style-type: none; width: 50%;"></ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        document.querySelector(".submit").addEventListener("click", function(e) {
+            e.preventDefault();
+            let name = document.getElementById("name").value;
+            if (name !== "") {
+            document.querySelector(".list").innerHTML +=
+                "<li class='d-flex justify-content-between mt-3 p-2 bg-warning' >" + name + "<div> <a class='rmv btn btn-danger btn-sm mx-1'>remove</a>" +
+                " <a  class='edt btn btn-info btn-sm mx-1' data-id='" + name + "'>edit</a> </div></li>"
+            ;
+            document.getElementById("name").value = "";
+            }
+        });
+        
+    </script>
+    <script>
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("rmv")) {
+                e.target.parentNode.parentNode.remove();
+            }
+
+            if (e.target.classList.contains("edt")) {
+                if (document.getElementById("name").value === "") {
+                let val = e.target.getAttribute("data-id");
+                console.log(val);
+                document.getElementById("name").value = val;
+                e.target.parentNode.parentNode.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
